@@ -1,0 +1,261 @@
+<!-- wp:html -->
+<!-- Optimized Header Section -->
+<style>
+/* Base variables for customization */
+:root {
+    --header-height: 70px;
+    --touch-target: 44px;
+    --primary-color: #3a0ca3;
+    --secondary-color: #4cc9f0;
+    --text-light: #ffffff;
+    --text-dark: #1a1a1a;
+    --transition-speed: 0.3s;
+    --safe-padding: max(env(safe-area-inset-left), 1rem);
+}
+
+/* Core header styles */
+.qai-header {
+    background: linear-gradient(135deg, rgba(58, 12, 163, 0.95), rgba(76, 201, 240, 0.95));
+    min-height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: env(safe-area-inset-top) var(--safe-padding) 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation container */
+.qai-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* Logo styles */
+.qai-logo {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 700;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: calc(var(--touch-target) - 1.5rem) 0;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu container */
+.qai-menu {
+    display: flex;
+    gap: clamp(1rem, 2vw, 2rem);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Menu links */
+.qai-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: calc((var(--touch-target) - 1rem) / 2) 1rem;
+    border-radius: 8px;
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    min-width: var(--touch-target);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qai-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Contact button */
+.qai-button {
+    background: var(--text-light);
+    color: var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: var(--touch-target);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qai-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile menu button */
+.qai-mobile-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    padding: calc((var(--touch-target) - 24px) / 2);
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .qai-button {
+        color: var(--primary-color);
+        background: var(--text-light);
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .qai-link,
+    .qai-button,
+    .qai-menu {
+        transition: none;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+    .qai-mobile-toggle {
+        display: block;
+    }
+
+    .qai-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .qai-menu.active {
+        display: flex;
+    }
+
+    .qai-link,
+    .qai-button {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .qai-menu {
+        gap: 1rem;
+    }
+    
+    .qai-link {
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .qai-header {
+        position: sticky;
+    }
+
+    .qai-menu.active {
+        max-height: 80vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+}
+
+/* Large screen optimization */
+@media (min-width: 1200px) {
+    .qai-nav {
+        padding: 0 2rem;
+    }
+}
+</style>
+
+<header class="qai-header">
+    <nav class="qai-nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="qai-logo" aria-label="Home">
+            Quantum AI
+        </a>
+        
+        <button class="qai-mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+        </button>
+
+        <div class="qai-menu" role="menu">
+            <a href="#services" class="qai-link" role="menuitem">Services</a>
+            <a href="#about" class="qai-link" role="menuitem">About</a>
+            <a href="#research" class="qai-link" role="menuitem">Research</a>
+            <a href="#contact" class="qai-button" role="menuitem">Contact</a>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.querySelector('.qai-mobile-toggle');
+    const menu = document.querySelector('.qai-menu');
+    
+    // Toggle menu function
+    function toggleMenu() {
+        const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+        mobileToggle.setAttribute('aria-expanded', !isExpanded);
+        menu.classList.toggle('active');
+    }
+
+    // Handle button clicks
+    mobileToggle.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.qai-nav')) {
+            menu.classList.remove('active');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menu.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
+
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            if (window.innerWidth > 768) {
+                menu.classList.remove('active');
+                mobileToggle.setAttribute('aria-expanded', 'false');
+            }
+        }, 250);
+    });
+});
+</script>
+<!-- End Optimized Header Section -->
+<!-- /wp:html -->
